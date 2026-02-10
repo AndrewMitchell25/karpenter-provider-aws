@@ -81,6 +81,9 @@ func (c *Controller) Reconcile(ctx context.Context) (reconciler.Result, error) {
 		}
 	}
 
+	InstanceTypeOfferingAvailable.Reset()
+	InstanceTypeOfferingPriceEstimate.Reset()
+
 	for dimensions, available := range availability {
 		InstanceTypeOfferingAvailable.Set(float64(lo.Ternary(available, 1, 0)), map[string]string{
 			instanceTypeLabel: dimensions.instanceType,
